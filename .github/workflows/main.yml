@@ -1,0 +1,42 @@
+name: HRV automation Test Suite
+
+on:
+  push:
+    branches: ["main" , "master"]
+  pull_request:
+    branches: ["main" , "master"]
+
+jobs:
+  tests:
+    runs-on: ubuntu-lastest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --update pip
+          pip install -r requirements.txt
+
+      - name: Run Pytest (Unit Tests)
+        run: |
+          pytest -v tests/test_core_logic.py
+      
+      - name: Run Robot Framework (Acceptance Tests)
+        run: |
+          mkdir -p test-results        
+          robot -outputdir test-results tests/hrv_tests.robot
+
+      
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-test-report
+          path: test-results/
+              

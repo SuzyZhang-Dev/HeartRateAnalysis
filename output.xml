@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.9.13 on darwin)" generated="2025-12-11T15:17:34.829856" rpa="false" schemaversion="5">
+<suite id="s1" name="Hrv Tests" source="/Users/yue/HeartRateAnalysis/tests/hrv_tests.robot">
+<test id="s1-t1" name="Verify High Stress Calculation" line="7">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-11T15:17:34.847137" level="INFO">@{high_stress_data} = [ 500 | 505 | 500 | 505 | 500 | 500 ]</msg>
+<var>@{high_stress_data}</var>
+<arg>[500, 505, 500, 505, 500, 500]</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.846991" elapsed="0.000165"/>
+</kw>
+<kw name="Calculate Metrics" owner="Engine">
+<msg time="2025-12-11T15:17:34.847339" level="INFO">${result} = {'mean_ppi': 501, 'mean_hr': 119, 'SDNN': 2.45, 'RMSSD': 4.47}</msg>
+<var>${result}</var>
+<arg>${high_stress_data}</arg>
+<doc>Docstring for calculate_metrics</doc>
+<status status="PASS" start="2025-12-11T15:17:34.847241" elapsed="0.000112"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-11T15:17:34.847489" level="INFO">Calculated Result:{'mean_ppi': 501, 'mean_hr': 119, 'SDNN': 2.45, 'RMSSD': 4.47}</msg>
+<arg>Calculated Result:${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.847417" elapsed="0.000093"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-11T15:17:34.847652" level="INFO">${hr} = 119</msg>
+<var>${hr}</var>
+<arg>${result}</arg>
+<arg>mean_hr</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.847569" elapsed="0.000096"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-11T15:17:34.847788" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${hr}</arg>
+<arg>119</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.847725" elapsed="0.000091"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-11T15:17:34.847956" level="INFO">${sdnn} = 2.45</msg>
+<var>${sdnn}</var>
+<arg>${result}</arg>
+<arg>SDNN</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.847874" elapsed="0.000095"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${sdnn} &lt; 5</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.848028" elapsed="0.000079"/>
+</kw>
+<doc>Test case for high stress scenario</doc>
+<status status="PASS" start="2025-12-11T15:17:34.846530" elapsed="0.001638"/>
+</test>
+<test id="s1-t2" name="Verify Normal Relaxation Calculation" line="21">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-11T15:17:34.848559" level="INFO">@{relax_data} = [ 950 | 1050 | 980 | 1020 | 1000 ]</msg>
+<var>@{relax_data}</var>
+<arg>[950, 1050, 980, 1020, 1000]</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.848466" elapsed="0.000107"/>
+</kw>
+<kw name="Calculate Metrics" owner="Engine">
+<msg time="2025-12-11T15:17:34.848717" level="INFO">${result} = {'mean_ppi': 1000, 'mean_hr': 60, 'SDNN': 34.06, 'RMSSD': 65.0}</msg>
+<var>${result}</var>
+<arg>${relax_data}</arg>
+<doc>Docstring for calculate_metrics</doc>
+<status status="PASS" start="2025-12-11T15:17:34.848633" elapsed="0.000097"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-11T15:17:34.848875" level="INFO">${hr} = 60</msg>
+<var>${hr}</var>
+<arg>${result}</arg>
+<arg>mean_hr</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.848793" elapsed="0.000095"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-11T15:17:34.849009" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${hr}</arg>
+<arg>60</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.848947" elapsed="0.000089"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-11T15:17:34.849177" level="INFO">${sdnn} = 34.06</msg>
+<var>${sdnn}</var>
+<arg>${result}</arg>
+<arg>SDNN</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.849095" elapsed="0.000096"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${sdnn} &gt; 20</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-12-11T15:17:34.849251" elapsed="0.000077"/>
+</kw>
+<doc>Test case for relaxation</doc>
+<status status="PASS" start="2025-12-11T15:17:34.848263" elapsed="0.001125"/>
+</test>
+<doc>HRV Analysis Logic Acceptance Tests</doc>
+<status status="PASS" start="2025-12-11T15:17:34.830470" elapsed="0.019105"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Hrv Tests" id="s1" pass="2" fail="0" skip="0">Hrv Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
